@@ -17,3 +17,19 @@ Por otro lado, usar joined-tables nos permitiría tener tablas más ordenadas y 
 Debido a que estas clases conforman una misma entidad dentro del dominio del problema, ya que tienen comportamientos similares, fueron modeladas mediante herencia de clases. Sin embargo comparten pocos atributos entre sí por lo que a la hora de adaptar el modelo de objetos finalmente se optó por la solución mediante joined-tables, usando las annotations del JPA @Inheritance(strategy = InheritanceType.JOINED) en las superclases PuntoDeInteres y PuntoDeInteresConServicios.
 
 En el dominio del problema entendemos que el uso más habitual será el de búsqueda de los puntos de interés a través de sus palabras clave y según la cercanía que tengan con respecto a la ubicación del usuario que realice la búsqueda. Por lo que la dificultad adicional y la pérdida de performance que supone hacer consultas polimórficas entre los puntos de interés no debería suponer una desventaja mayor que los beneficios que trae.
+
+---
+
+###Persistencia de las búsquedas de los puntos de interés.
+
+Nuestros objetos de Búsqueda están compuestos por el usuario que la realiza, el texto que ingresó para realizar la búsqueda, la fecha en que se hizo, el tiempo de respuesta y el conjunto de puntos de interés que fueron encontrados.
+
+En este caso nos encontramos con que las bases de datos relacionales no poseen mecanismos con los que representar la composición de objetos, por lo que para representar la relación de que una búsqueda contiene múltiple puntos de interés, y que un mismo punto de interés puede estar en muchas búsquedas es necesario crear una tabla intermedia PuntoDeInteresEncontrado que indique que puntos de interés pertenecen a cada búsqueda.
+
+Para indicar al JPA que es necesario crear esta tabla intermedia se usaron las siguientes annotations dentro de la clase Búsqueda:
+
+    `@ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)`
+    `@JoinTable(name = "PuntoDeInteresEncontrado")`
+    `private Set<PuntoDeInteres> puntosDeInteresEncontrados;`
+
+Como dentro de nuestro modelo no pueden existir búsquedas sin un conjunto de puntos de interés encontrados (Aunque sea debe tener un conjunto vacío). Se decidió usar el FetchType.EAGER que se asegura de traer el conjunto de datos al momento de acceder a la base de datos, en contraposición con FetchType.LAZY que se encarga de obtener el conjunto de datos al momento de acceder a ellos.
