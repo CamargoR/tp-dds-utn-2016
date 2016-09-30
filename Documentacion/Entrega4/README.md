@@ -45,12 +45,12 @@ La lógica de los horarios de atención fue modelada como un objeto de la clase 
 En este caso al pasar la relación de composición entre objetos HorarioDeAtencion-DiaYHorarioDeAtencion y DiaYHorarioDeAtencion-RangoDeHorario al modelo relacional de la base de datos, se convirtieron estas relaciones del tipo “uno a muchos”, por lo que se usaron las siguientes annotations del JPA:
 
 `Clase: HorarioDeAtencion`
-    `@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)`
-    `@JoinColumn(name = "puntoInteres_id")`
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "puntoInteres_id")
     `private Set<DiaYHorarioDeAtencion> horariosDeAtencionPorDia;`
 
 `Clase: DiaYHorarioDeAtencion`
-    `@OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)`
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     `@JoinColumn(name = "diaYhorarioDeAtencion_id")`
     `private Set<RangoDeHorario> rangosDeHorario;`
 
