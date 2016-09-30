@@ -1,1 +1,19 @@
-README
+### Persistencia de Puntos de Interes:
+
+En nuestro modelo de objetos los puntos de interés están representados por una clase abstracta PuntoDeInteres que contiene el nombre del punto de interés, su ubicación, la fecha en que fue dado de baja (Si estuviese dado de baja) y las palabras clave con las que se lo puede buscar.
+
+De esta clase abstracta heredan las clases LocalComercial, ParadaDeColectivo y otra clase abstracta PuntoDeInteresConServicios de la que heredan las clases CGP y Banco.
+
+La clase CGP tiene una zona de cobertura. Mientras que el Banco tiene un horario de atencion. La clase LocalComercial posee un horario de atención y un rubro.
+
+---
+
+Para persistir este modelo de objetos en una base de datos relacional se propusieron dos  modelos posibles, uno aplicando una single-table y otro aplicando joined-tables.
+
+Con respecto a estos modelos entendimos que el uso de una single-table facilitaba las consultas que debíamos hacer a la base de datos a expensas de tener tablas más pesadas, requerir un campo que distinga a qué tipo de punto de interés nos estamos refiriendo y que algunos campos queden asignados nulos cuando no se correspondan al tipo de punto de interés al que nos referimos. A su vez, la forma de distinguir el tipo de punto de interés podría indicarse mediante un id que referencie a una tabla que contenga todos los tipos de punto de interés o indicarse la clase a la que pertenece mediante un atributo VARCHAR.
+
+Por otro lado, usar joined-tables nos permitiría tener tablas más ordenadas y ligeras pero requerirían un esfuerzo mayor a la hora de realizar las consultas a la base de datos, esto se debe a que al tener distintas tablas para cada tipo de punto de interés las consultas que se deban realizar polimórficamente se tornan complejas al tener que hacer joins entre tablas.
+
+Debido a que estas clases conforman una misma entidad dentro del dominio del problema, ya que tienen comportamientos similares, fueron modeladas mediante herencia de clases. Sin embargo comparten pocos atributos entre sí por lo que a la hora de adaptar el modelo de objetos finalmente se optó por la solución mediante joined-tables, usando las annotations del JPA @Inheritance(strategy = InheritanceType.JOINED) en las superclases PuntoDeInteres y PuntoDeInteresConServicios.
+
+En el dominio del problema entendemos que el uso más habitual será el de búsqueda de los puntos de interés a través de sus palabras clave y según la cercanía que tengan con respecto a la ubicación del usuario que realice la búsqueda. Por lo que la dificultad adicional y la pérdida de performance que supone hacer consultas polimórficas entre los puntos de interés no debería suponer una desventaja mayor que los beneficios que trae.
