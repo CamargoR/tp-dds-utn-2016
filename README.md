@@ -1,5 +1,3 @@
-[![Build Status](https://travis-ci.com/dds-utn/2016-vn-group-12.svg?token=HmjbwKiw6npoySu9LRg7&branch=master)](https://travis-ci.com/dds-utn/2016-vn-group-12)
-
 # 2016-vn-group-12
 TP 2016 del Grupo 12 del curso K3053 Viernes Noche. Docente Franco Bulgarelli
 
@@ -28,7 +26,6 @@ TP 2016 del Grupo 12 del curso K3053 Viernes Noche. Docente Franco Bulgarelli
 ###[Enunciado 3° Entrega](https://docs.google.com/document/d/1MSf0zRpzrh0_ykWDaF-wm9a4D4vZ3_WdKL__945MM8c/edit)
 ###[Enunciado 4° Entrega](https://docs.google.com/document/d/1tSZANdI8mfOyQrS38smCJGW90t_8CHkDLrbgwNCkUIM/edit)
 ###[Enunciado 5° Entrega](https://docs.google.com/document/d/1UJp1swA3JWm6tOMQAPw3YtYmLTqfgP9flxAt92v0osM/edit)
-###[Enunciado 6° Entrega](https://docs.google.com/document/d/190ME2qXcp2EbBTY8VqrsKkmfZK_OwGkVxYvgxls8wEs/edit)
 
 ###[Grupo de Facebook](https://www.facebook.com/groups/269933970012691/)
 
@@ -43,5 +40,5 @@ TP 2016 del Grupo 12 del curso K3053 Viernes Noche. Docente Franco Bulgarelli
 |2|03/06|
 |3|01/07|
 |4|30/09|
-|5|28/10|
+|5|21/10|
 |6|11/11|
